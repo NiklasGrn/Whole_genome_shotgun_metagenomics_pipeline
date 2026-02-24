@@ -10,13 +10,13 @@ process KRAKEN2 {
     val stage
 
     output:
-    tuple val(sample_id), path("${sample_id}_${input_file.simpleName}_report.txt"), emit: report
+    tuple val(sample_id), path("${input_file.simpleName}_report.txt"), emit: report
 
     script:
     """   
     kraken2 --db ${db_dir} \
             --threads ${task.cpus} \
-            --report ${sample_id}_${input_file.simpleName}_report.txt \
+            --report ${input_file.simpleName}_report.txt \
             --output /dev/null \
             --use-names \
             ${input_file}

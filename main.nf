@@ -7,7 +7,8 @@ params.output_qc = "results"
 params.outdir = "results"
 params.tool = "flye"
 
-params.kraken_db = "/group/db/kraken"
+params.kraken_db = "/group/db/Kraken2_plusPF_072025"
+params.bracken_db_files = "/group/db/Bracken_plusPF_072025"
 params.db_dir = "db"
 // Host Depletion Parameters
 params.host_ref = null
@@ -28,7 +29,7 @@ include { BINNING_ANALYSIS } from './subworkflows/binning_analysis.nf'
 
 
 workflow {
-    reads_ch = channel.fromPath(params.reads).map{file -> tuple(file.baseName, file)}
+    reads_ch = channel.fromPath(params.reads).map{file -> tuple(file.simpleName, file)}
     kraken_db_ch = channel.value(file(params.kraken_db))
     
     // QC

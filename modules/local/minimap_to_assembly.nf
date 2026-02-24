@@ -1,6 +1,6 @@
 process MAPPING_TO_ASSEMBLY {
     tag "Mapping ${sample_id}"
-    cpus 16
+    cpus 8
 
     input:
     tuple val(sample_id), path(assembly), path(reads)

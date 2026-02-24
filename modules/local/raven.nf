@@ -1,6 +1,6 @@
 process ASSEMBLY {
     tag "Raven ${sample_id}"
-    publishDir "${params.outdir}/${params.out_assambly}/Raven", mode: 'copy'
+    publishDir "${params.outdir}/${params.out_assembly}/Raven", mode: 'copy'
     cpus 16 
     memory '64 GB'
 

@@ -1,6 +1,6 @@
 process ASSEMBLY {
     tag "Flye ${sample_id}"
-    publishDir "${params.outdir}/${params.out_assambly}/Flye", mode: 'copy'
+    publishDir "${params.outdir}/${params.out_assembly}/Flye", mode: 'copy'
     cpus 16 
     memory '64 GB'
 
@@ -11,6 +11,7 @@ process ASSEMBLY {
     tuple val(sample_id), path("${sample_id}_assembly.fasta"), emit: contigs
     path "${sample_id}_flye.log"
     path "${sample_id}_assembly_info.txt"
+    path "${sample_id}_assembly_graph.gfa", emit: assembly_graph
 
     script:
     """
@@ -19,8 +20,10 @@ process ASSEMBLY {
         --meta \
         --threads ${task.cpus}
 
+
     mv assembly.fasta ${sample_id}_assembly.fasta
     mv flye.log ${sample_id}_flye.log
     mv assembly_info.txt ${sample_id}_assembly_info.txt
+    mv assembly_graph.gfa ${sample_id}_assembly_graph.gfa
     """
 }
